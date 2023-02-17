@@ -1,9 +1,9 @@
 import './App.css';
-import Landing from './LandingComponent/Landing';
+import Landing from './Pages/Landing';
 function App() {
   return (
     <>
-      <Landing/>
+      <Landing />
     </>
   );
 }

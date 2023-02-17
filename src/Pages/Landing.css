@@ -168,13 +168,16 @@
     .landing-heading {
         font-size: 3.5rem;
     }
+
     .landing-heading-span-large {
         font-size: 4rem;
     }
+
     .landing-text {
         font-size: 1.2rem;
         margin: 1rem 3rem;
     }
+
     .landing-input {
         width: 25rem;
         height: 3rem;
@@ -187,13 +190,16 @@
     .landing-logo-text {
         font-size: 2rem;
     }
+
     .landing-logo {
         font-size: 1rem;
     }
+
     .landing-heading {
         font-size: 3rem;
     }
-    .landing-input-container{
+
+    .landing-input-container {
         flex-direction: column;
     }
 
@@ -216,17 +222,20 @@
     }
 }
 
-@media (max-width: 450px){
+@media (max-width: 450px) {
     .landing-heading {
         font-size: 2.5rem;
     }
+
     .landing-heading-span-large {
         font-size: 3rem;
     }
+
     .landing-text {
         font-size: 1.2rem;
         margin: 1rem 1rem;
     }
+
     .landing-input {
         width: 15rem;
         height: 2rem;
@@ -235,6 +244,7 @@
         margin-bottom: 1rem;
         font-size: 1rem;
     }
+
     .glow-on-hover-landing {
         width: 150px;
         height: 40px;
@@ -248,4 +258,3 @@
         border-radius: 5rem;
     }
 }
-

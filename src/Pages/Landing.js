@@ -18,7 +18,7 @@ export default function Landing() {
     };
 
     const handleOnLandingButtonClick = () => {
-        if(name.length > 0){
+        if (name.length > 0) {
             todo_token['PersonName'] = name;
             localStorage.setItem('todo_token', JSON.stringify(todo_token));
         }
@@ -39,7 +39,7 @@ export default function Landing() {
             />
 
             <div className="landing-logo-container">
-                <ListAltIcon className = 'landing-logo' style={{
+                <ListAltIcon className='landing-logo' style={{
                     fontSize: 100,
                     color: '#ff1361',
                 }} font-size='large' />
@@ -59,7 +59,7 @@ export default function Landing() {
             <p className='landing-text'><em><strong>Wrike</strong></em> is a simple to-do application that allows you to create, edit, and delete tasks.</p>
 
             <div className='landing-input-container'>
-                <Input placeholder='Enter your name' className='landing-input' value={name} onChange={handleNameChange}/>
+                <Input placeholder='Enter your name' className='landing-input' value={name} onChange={handleNameChange} />
                 <Button type='primary' className='glow-on-hover-landing' onClick={handleOnLandingButtonClick}>Lets Go!</Button>
             </div>
         </div>
