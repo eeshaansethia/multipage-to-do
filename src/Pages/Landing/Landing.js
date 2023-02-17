@@ -3,14 +3,25 @@ import './Landing.css'
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ReactAnimatedCursor from 'react-animated-cursor';
 import { Input, Button } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Landing() {
     const [name, setName] = useState('');
+    const navigate = useNavigate();
+
+    const checkUserToken = () => {
+        const userToken = localStorage.getItem('todo_token');
+        if (userToken && userToken !== 'undefined') {
+            navigate('/app');
+        }
+    }
+    useEffect(() => {
+        checkUserToken();
+    }, []);
 
     const handleNameChange = (e) => {
         setName(e.target.value);
-        console.log(name)
     };
 
     let todo_token = {
@@ -21,6 +32,7 @@ export default function Landing() {
         if (name.length > 0) {
             todo_token['PersonName'] = name;
             localStorage.setItem('todo_token', JSON.stringify(todo_token));
+            checkUserToken();
         }
     }
 
