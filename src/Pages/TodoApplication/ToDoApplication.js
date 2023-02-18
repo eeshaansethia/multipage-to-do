@@ -33,13 +33,13 @@ export default function ToDoApplication() {
   const [deadline, setDeadline] = useState(null);
   const [dateAdded, setDateAdded] = useState(new Date());
   const [formValues, setFormValues] = useState({});
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 6 });
 
-  {
-    /*This function checks if the user is logged in or not. 
-    If not, it redirects to the login page. 
-    If yes, it sets the data to the user's data.*/
-  }
+  const handleTableChange = (pagination) => {
+    setPagination(pagination);
+  };
 
+  {/* This function gets the data from the local storage and sets it to the data variable.*/ }
   const getData = () => {
     const userToken = localStorage.getItem('todo_token');
     let todo_data = JSON.parse(userToken);
@@ -47,6 +47,12 @@ export default function ToDoApplication() {
     todoActualData.filter((item) => 'key' in item);
     setData(todoActualData);
     setName(todo_data.PersonName);
+  }
+
+  {
+    /*This function checks if the user is logged in or not. 
+    If not, it redirects to the login page. 
+    If yes, it sets the data to the user's data.*/
   }
 
   const checkUserToken = () => {
@@ -59,6 +65,7 @@ export default function ToDoApplication() {
     }
   }
 
+  {/* This function deletes a particular task*/ }
   const taskDeleteHandler = (id) => {
     let newData = data.filter((item) => item.key !== id);
     const userToken = localStorage.getItem('todo_token');
@@ -70,15 +77,20 @@ export default function ToDoApplication() {
 
   const submitForm = (event) => {
     event.preventDefault();
+
+    {/* To make sure empty data is not been sent to the storage. */ }
+
     if (taskName !== '' || deadline !== null) {
       const id = uuidv4();
+      let date = deadline.toISOString().substring(0, 10);
+      let dateCreated = dateAdded.toISOString().substring(0, 10);
       setFormValues(
         {
           key: id,
           taskName: taskName,
           description: description,
-          deadline: deadline,
-          dateAdded: dateAdded
+          deadline: date,
+          dateAdded: dateCreated
         }
       );
       form.resetFields();
@@ -97,14 +109,10 @@ export default function ToDoApplication() {
     }
   }
 
-  // useEffect(() => {
-
-  // }, [updateTaskList]);
-
 
   const matches = useMediaQuery("(max-width:1040px)");
 
-
+  {/* This function is called when the page is loaded, as well as whenever values of a function are changed, to rerender the table data*/ }
   useEffect(() => {
     updateTaskList();
     checkUserToken();
@@ -123,14 +131,21 @@ export default function ToDoApplication() {
       title: "Task Name",
       dataIndex: "taskName",
       key: "taskName",
-      width: 100,
+      width: 120,
       ellipsis: true,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: 300,
+      width: 250,
+      ellipsis: true,
+    },
+    {
+      title: "Date Created",
+      dataIndex: "dateAdded",
+      key: "dateAdded",
+      width: 130,
       ellipsis: true,
     },
     {
@@ -143,7 +158,7 @@ export default function ToDoApplication() {
     {
       title: "Action",
       key: "action",
-      width: 150,
+      width: 100,
       fixed: matches ? "right" : "",
       render: (record) => {
         return (
@@ -218,7 +233,8 @@ export default function ToDoApplication() {
         style={{ margin: "5rem 8rem" }}
         columns={columns}
         dataSource={data}
-      // scroll={matches ? { x: "fit-content", y: "75vh" } : { y: "75vh" }}
+        pagination={pagination}
+        onChange={handleTableChange}
       />
 
       <button className="plus-button" onClick={() => { setShowModal(true) }}>Add Task</button>

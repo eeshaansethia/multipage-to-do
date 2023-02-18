@@ -302,6 +302,26 @@
     color: rgba(255, 255, 255, 0.5) !important;
 }
 
+.ant-table-wrapper .ant-table-thead>tr>th {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+}
+
+.ant-pagination-item a {
+    font-family: 'Fredoka One', cursive;
+    color: white !important;
+}
+
+.ant-pagination-item-active {
+    background-color: #292A2B !important;
+    border-color: #292A2B !important;
+}
+
+.ant-pagination-prev span,
+.ant-pagination-next span {
+    font-family: 'Fredoka One', cursive;
+    color: white !important;
+}
 
 
 @media (max-width: 900px) {
