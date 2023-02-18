@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.header {
+    background-color: #1e1e1e;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.app-logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding: 0.8rem;
+}
+
+.app-logo-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: #eee;
+    margin-left: 0.5rem;
+}
+
+.app-name-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.app-header-name {
+    font-family: cursive;
+    font-size: 1.3rem;
+    text-align: center;
+    color: #eee;
+    letter-spacing: 0.35rem;
+    display: block;
+    margin: 0 1rem;
+}
+
+.app-header-name span {
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.app-heading {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    text-align: center;
+    color: #eee;
+    /* letter-spacing: 0.35rem; */
+}
+
+.logout-icon {
+    font-size: 2rem !important;
+    color: #eee;
+    cursor: pointer;
+}
+
+.plus-button {
+    height: 3rem;
+    width: 10rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+    z-index: 0;
+    border-radius: 5rem;
+    font-family: cursive;
+    font-size: 1.5rem;
+    transform: scale(1);
+    transition: transform .3s ease-in-out;
+}
+
+.plus-button:before {
+    content: '';
+    background: linear-gradient(45deg, #D04943, #44107a, #ff1361, #666BE3);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+    border-radius: 5rem;
+}
+
+.plus-button:active {
+    color: #000
+}
+
+.plus-button:active:after {
+    background: transparent;
+}
+
+.plus-button:hover {
+    transform: scale(1.1);
+}
+
+.plus-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 5rem;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        left: 4.5rem;
+    }
+
+    to {
+        opacity: 1;
+        left: 5.5rem;
+    }
+}
+
+
+
+@media (max-width: 900px) {
+    .header {
+        padding: 0 1rem;
+    }
+
+    .app-header-name {
+        font-size: 1.2rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .app-header-name span {
+        font-size: 1.4rem;
+    }
+
+    .app-logo-text {
+        font-size: 1.4rem;
+    }
+
+    .app-heading {
+        font-size: 1.5rem;
+    }
+
+    .logout-icon {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 680px) {
+    .app-header-name {
+        font-size: 1rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .app-header-name span {
+        font-size: 1.2rem;
+    }
+
+    .app-logo-text {
+        font-size: 1.2rem;
+    }
+
+    .app-heading {
+        font-size: 1.3rem;
+    }
+}

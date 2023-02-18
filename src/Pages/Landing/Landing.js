@@ -27,6 +27,14 @@ export default function Landing() {
 
     let todo_token = {
         PersonName: '',
+        Tasks: [
+            {
+
+            }
+        ],
+        DailyTask: [
+            {}
+        ]
     };
 
     const handleOnLandingButtonClick = () => {
@@ -66,7 +74,7 @@ export default function Landing() {
                 <ListAltIcon sx={{ fill: "url(#linearColors)" }} className='landing-logo' style={{
                     fontSize: 100,
                     color: '#ff1361',
-                }} font-size='large' />
+                }} />
 
                 {/*The name Wrike was taken from the AI name finding application https://namelix.com/ */}
                 <h1 className='landing-logo-text'>WRIKE</h1>
