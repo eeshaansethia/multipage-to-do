@@ -107,7 +107,7 @@ export default function ToDoApplication() {
     localStorage.setItem('todo_token', JSON.stringify(todo_data));
     setData(newData);
   }
-  
+
   const submitForm = (event) => {
     event.preventDefault();
 
@@ -159,6 +159,7 @@ export default function ToDoApplication() {
     console.log('Failed:', errorInfo);
   };
 
+  {/* Adding the columns for tbale*/ }
   const columns = [
     {
       title: "Task Name",
@@ -187,6 +188,7 @@ export default function ToDoApplication() {
       key: "deadline",
       width: 100,
       ellipsis: true,
+      sorter: (a, b) => new Date(a.deadline) - new Date(b.deadline)
     },
     {
       title: "Status",
@@ -194,7 +196,16 @@ export default function ToDoApplication() {
       key: "status",
       width: 100,
       ellipsis: true,
-      sorter: (a, b) => a.status === 'Pending' ? -1 : 1
+      sorter: (a, b) => a.status === 'Pending' ? -1 : 1,
+      render: (text) => {
+        if (text === 'Pending') {
+          return <span style={{ color: 'red' }}>{text}</span>;
+        }
+        else if (text === 'Completed') {
+          return <span style={{ color: 'green' }}>{text}</span>;
+        }
+        return text;
+      },
     },
     {
       title: "Action",
@@ -264,7 +275,7 @@ export default function ToDoApplication() {
 
 
   return (
-    <div>
+    <div className='app-container'>
       <div className="header">
         <div className="app-logo-container">
           {/* Code from Stack Overflow to use gradient in MaterialUI Icons */}

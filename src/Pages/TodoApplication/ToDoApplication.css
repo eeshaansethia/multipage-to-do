@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
 .header {
     background-color: #1e1e1e;
     height: 4rem;
@@ -326,6 +333,11 @@
 .table-container {
     width: 100%;
     overflow-x: auto;
+}
+
+td {
+    font-family: cursive;
+    font-size: 1rem;
 }
 
 
