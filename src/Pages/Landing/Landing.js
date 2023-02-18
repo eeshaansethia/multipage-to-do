@@ -27,11 +27,7 @@ export default function Landing() {
 
     let todo_token = {
         PersonName: '',
-        Tasks: [
-            {
-
-            }
-        ]
+        Tasks: []
     };
 
     const handleOnLandingButtonClick = () => {
