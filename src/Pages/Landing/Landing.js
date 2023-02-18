@@ -88,7 +88,18 @@ export default function Landing() {
             <p className='landing-text'><em><strong>Wrike</strong></em> is a simple to-do application that allows you to create, edit, and delete tasks.</p>
 
             <div className='landing-input-container'>
-                <Input placeholder='Enter your name' className='landing-input' value={name} onChange={handleNameChange} />
+                <Input
+                    placeholder='Enter your name'
+                    className='landing-input'
+                    value={name}
+                    onChange={handleNameChange}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please enter your name!',
+                        },
+                    ]}
+                />
                 <Button type='primary' className='glow-on-hover-landing' onClick={handleOnLandingButtonClick}>Lets Go!</Button>
             </div>
         </div>
