@@ -92,7 +92,7 @@ export default function ToDoApplication() {
     localStorage.setItem('todo_token', JSON.stringify(todo_data));
     setData(newData);
   }
-
+  {/* This function marks a particular task as incomplete*/ }
   const markInCompleteHandler = (id) => {
     const newData = data.map((item) => {
       if (item.key === id) {
@@ -107,9 +107,7 @@ export default function ToDoApplication() {
     localStorage.setItem('todo_token', JSON.stringify(todo_data));
     setData(newData);
   }
-
-
-
+  
   const submitForm = (event) => {
     event.preventDefault();
 
