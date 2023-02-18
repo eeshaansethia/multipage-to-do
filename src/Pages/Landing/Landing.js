@@ -1,10 +1,10 @@
 import React from 'react'
 import './Landing.css'
 import ListAltIcon from '@mui/icons-material/ListAlt';
-import ReactAnimatedCursor from 'react-animated-cursor';
 import { Input, Button } from 'antd';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactAnimatedCursor from 'react-animated-cursor';
 
 export default function Landing() {
     const [name, setName] = useState('');
@@ -31,9 +31,6 @@ export default function Landing() {
             {
 
             }
-        ],
-        DailyTask: [
-            {}
         ]
     };
 
@@ -53,7 +50,7 @@ export default function Landing() {
             <ReactAnimatedCursor
                 innerSize={20}
                 outerSize={45}
-                color='255,255,255'
+                color='249,231,13'
                 outerAlpha={0.2}
                 innerScale={0.5}
                 outerScale={1.1}

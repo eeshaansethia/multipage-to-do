@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Modal } from 'antd';
+import TaskAdder from './Components/TaskAdder';
 
 export default function ToDoApplication() {
 
   const navigate = useNavigate({});
   const [data, setData] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const checkUserToken = () => {
     const userToken = localStorage.getItem('todo_token');
@@ -61,8 +64,18 @@ export default function ToDoApplication() {
         </div>
       </div>
 
-      <button className="plus-button">Add Task</button>
-
+      <button className="plus-button" onClick={() => { setShowModal(true) }}>Add Task</button>
+      <Modal
+        style={{ width: "100vw" }}
+        centered={true}
+        footer={<></>}
+        open={showModal}
+        onCancel={() => setShowModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <TaskAdder setShowModal={setShowModal}/>
+      </Modal>
     </div>
   )
 }
