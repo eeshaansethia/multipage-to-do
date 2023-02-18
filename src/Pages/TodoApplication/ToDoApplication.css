@@ -312,7 +312,7 @@
     color: white !important;
 }
 
-.ant-pagination-item-active {
+.ant-table-wrapper .ant-pagination-item-active {
     background-color: #292A2B !important;
     border-color: #292A2B !important;
 }
@@ -322,6 +322,13 @@
     font-family: 'Fredoka One', cursive;
     color: white !important;
 }
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
 
 
 @media (max-width: 900px) {
@@ -348,6 +355,12 @@
 
     .logout-icon {
         font-size: 1.5rem !important;
+    }
+}
+
+@media (maxx-width: 768px) {
+    .table-container {
+        overflow-x: scroll;
     }
 }
 

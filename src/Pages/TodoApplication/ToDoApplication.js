@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ClearIcon from '@mui/icons-material/Clear';
 import {
   Modal,
   Tooltip,
@@ -16,6 +17,7 @@ import {
   DatePicker
 } from 'antd';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import TextArea from "antd/es/input/TextArea";
 import { v4 as uuidv4 } from 'uuid';
@@ -45,6 +47,7 @@ export default function ToDoApplication() {
     let todo_data = JSON.parse(userToken);
     let todoActualData = todo_data.Tasks;
     todoActualData.filter((item) => 'key' in item);
+    todoActualData.filter((item) => item.status !== "Pending");
     setData(todoActualData);
     setName(todo_data.PersonName);
   }
@@ -74,6 +77,38 @@ export default function ToDoApplication() {
     localStorage.setItem('todo_token', JSON.stringify(todo_data));
     setData(newData);
   };
+  {/* This function marks a particular task as completed*/ }
+  const markCompleteHandler = (id) => {
+    const newData = data.map((item) => {
+      if (item.key === id) {
+        return { ...item, status: "Completed" };
+      } else {
+        return item;
+      }
+    });
+    const userToken = localStorage.getItem('todo_token');
+    let todo_data = JSON.parse(userToken);
+    todo_data.Tasks = newData;
+    localStorage.setItem('todo_token', JSON.stringify(todo_data));
+    setData(newData);
+  }
+
+  const markInCompleteHandler = (id) => {
+    const newData = data.map((item) => {
+      if (item.key === id) {
+        return { ...item, status: "Pending" };
+      } else {
+        return item;
+      }
+    });
+    const userToken = localStorage.getItem('todo_token');
+    let todo_data = JSON.parse(userToken);
+    todo_data.Tasks = newData;
+    localStorage.setItem('todo_token', JSON.stringify(todo_data));
+    setData(newData);
+  }
+
+
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -87,6 +122,7 @@ export default function ToDoApplication() {
       setFormValues(
         {
           key: id,
+          status: "Pending",
           taskName: taskName,
           description: description,
           deadline: date,
@@ -108,7 +144,6 @@ export default function ToDoApplication() {
       setShowModal(false);
     }
   }
-
 
   const matches = useMediaQuery("(max-width:1040px)");
 
@@ -138,7 +173,7 @@ export default function ToDoApplication() {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: 250,
+      width: 150,
       ellipsis: true,
     },
     {
@@ -154,6 +189,14 @@ export default function ToDoApplication() {
       key: "deadline",
       width: 100,
       ellipsis: true,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      width: 100,
+      ellipsis: true,
+      sorter: (a, b) => a.status === 'Pending' ? -1 : 1
     },
     {
       title: "Action",
@@ -185,6 +228,34 @@ export default function ToDoApplication() {
                 <DeleteIcon style={{ cursor: "pointer" }} />
               </Popconfirm>
             </Tooltip>
+
+            {/* This is the code for the mark complete and mark pending buttons */}
+            {
+              record.status === "Pending" ? <Tooltip color="#333333" placement="bottom" title="Mark Complete">
+                <Popconfirm
+                  onConfirm={() => {
+                    markCompleteHandler(record.key)
+                  }}
+                  title="Mark Complete?"
+                >
+                  <CheckIcon
+                    style={{ cursor: "pointer" }}
+                  />
+                </Popconfirm>
+              </Tooltip>
+                : <Tooltip color="#333333" placement="bottom" title="Mark Pending">
+                  <Popconfirm
+                    onConfirm={() => {
+                      markInCompleteHandler(record.key)
+                    }}
+                    title="Mark Pending?"
+                  >
+                    <ClearIcon style={{ cursor: "pointer" }} />
+                  </Popconfirm>
+                </Tooltip>
+            }
+
+
           </Space>
         );
       },
@@ -228,14 +299,15 @@ export default function ToDoApplication() {
             }} />
         </div>
       </div>
-
-      <Table
-        style={{ margin: "5rem 8rem" }}
-        columns={columns}
-        dataSource={data}
-        pagination={pagination}
-        onChange={handleTableChange}
-      />
+      <div className="table-container">
+        <Table
+          style={{ margin: "5rem 5rem" }}
+          columns={columns}
+          dataSource={data}
+          pagination={pagination}
+          onChange={handleTableChange}
+        />
+      </div>
 
       <button className="plus-button" onClick={() => { setShowModal(true) }}>Add Task</button>
 
