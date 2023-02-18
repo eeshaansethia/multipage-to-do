@@ -20,6 +20,7 @@ export default function Landing() {
         checkUserToken();
     }, []);
 
+
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
@@ -33,6 +34,8 @@ export default function Landing() {
             todo_token['PersonName'] = name;
             localStorage.setItem('todo_token', JSON.stringify(todo_token));
             checkUserToken();
+        }
+        else {
         }
     }
 
@@ -51,7 +54,16 @@ export default function Landing() {
             />
 
             <div className="landing-logo-container">
-                <ListAltIcon className='landing-logo' style={{
+                {/* Code from Stack Overflow to use gradient in MaterialUI Icons */}
+                <svg width={0} height={0}>
+                    <linearGradient id="linearColors" x1={1} y1={0} x2={1} y2={1}>
+                        <stop offset={0} stopColor="#D04943" />
+                        <stop offset={1} stopColor="#44107a" />
+                        <stop offset={2} stopColor="#ff1361" />
+                        <stop offset={3} stopColor="#666BE3" />
+                    </linearGradient>
+                </svg>
+                <ListAltIcon sx={{ fill: "url(#linearColors)" }} className='landing-logo' style={{
                     fontSize: 100,
                     color: '#ff1361',
                 }} font-size='large' />
