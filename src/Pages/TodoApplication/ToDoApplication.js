@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   Modal,
   Tooltip,
@@ -28,14 +29,19 @@ export default function ToDoApplication() {
   const [data, setData] = useState(false);
   const [name, setName] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [loadingText, setLoadingText] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
   const [form] = Form.useForm();
+  const [editForm] = Form.useForm();
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState(null);
   const [dateAdded, setDateAdded] = useState(new Date());
   const [formValues, setFormValues] = useState({});
   const [pagination, setPagination] = useState({ current: 1, pageSize: 6 });
+  const [taskEditName, setTaskEditName] = useState('');
+  const [descriptionEdit, setDescriptionEdit] = useState('');
+  const [deadlineEdit, setDeadlineEdit] = useState(null);
+  const [idEdit, setIdEdit] = useState('');
 
   const handleTableChange = (pagination) => {
     setPagination(pagination);
@@ -92,6 +98,12 @@ export default function ToDoApplication() {
     localStorage.setItem('todo_token', JSON.stringify(todo_data));
     setData(newData);
   }
+
+  const editTaskHandler = (id) => {
+    setShowEditModal(true);
+    setIdEdit(id);
+  }
+
   {/* This function marks a particular task as incomplete*/ }
   const markInCompleteHandler = (id) => {
     const newData = data.map((item) => {
@@ -131,6 +143,26 @@ export default function ToDoApplication() {
     }
   };
 
+  const submitEditForm = (event) => {
+    event.preventDefault();
+    let date = deadlineEdit.toISOString().substring(0, 10);
+    const newData = data.map((item) => {
+      if (item.key === idEdit) {
+        return { ...item, taskName: taskEditName, description: descriptionEdit, deadline: date };
+      } else {
+        return item;
+      }
+    });
+    const userToken = localStorage.getItem('todo_token');
+    let todo_data = JSON.parse(userToken);
+    todo_data.Tasks = newData;
+    localStorage.setItem('todo_token', JSON.stringify(todo_data));
+    setData(newData);
+    setShowEditModal(false);
+    editForm.resetFields();
+  }
+
+
 
   const updateTaskList = () => {
     if (Object.keys(formValues).length !== 0) {
@@ -152,27 +184,20 @@ export default function ToDoApplication() {
 
   }, [formValues]);
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
   {/* Adding the columns for tbale*/ }
   const columns = [
     {
       title: "Task Name",
       dataIndex: "taskName",
       key: "taskName",
-      width: 120,
+      width: 150,
       ellipsis: true,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: 150,
+      width: 220,
       ellipsis: true,
     },
     {
@@ -199,10 +224,10 @@ export default function ToDoApplication() {
       sorter: (a, b) => a.status === 'Pending' ? -1 : 1,
       render: (text) => {
         if (text === 'Pending') {
-          return <span style={{ color: 'red' }}>{text}</span>;
+          return <span style={{ color: 'red', fontWeight: '600' }}>{text}</span>;
         }
         else if (text === 'Completed') {
-          return <span style={{ color: 'green' }}>{text}</span>;
+          return <span style={{ color: 'green', fontWeight: '600' }}>{text}</span>;
         }
         return text;
       },
@@ -215,18 +240,16 @@ export default function ToDoApplication() {
       render: (record) => {
         return (
           <Space justify="space-between">
-            {/* <Tooltip color="#333333" placement="bottom" title="Update">
-              <img
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setShowModal(true);
-                  productUpdateHandler(record.id);
+            <Tooltip color="#333333" placement="bottom" title="Edit">
+              <Popconfirm
+                onConfirm={() => {
+                  editTaskHandler(record.key);
                 }}
-                width="70%"
-                alt="update"
-                src={`${baseUrl}icons/update.png`}
-              ></img>
-            </Tooltip> */}
+                title="Edit?"
+              >
+                <EditIcon style={{ cursor: "pointer" }} />
+              </Popconfirm>
+            </Tooltip>
             <Tooltip color="#333333" placement="bottom" title="Delete">
               <Popconfirm
                 onConfirm={() => {
@@ -334,8 +357,6 @@ export default function ToDoApplication() {
           <h1 className="modal-heading">Add a Task</h1>
           <Form
             name='task-adder-form'
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             form={form}
             id="task-adder-form"
@@ -399,13 +420,95 @@ export default function ToDoApplication() {
               />
             </Form.Item>
             <div className="button-container">
-              <Button className='modal-buttons' type="primary" htmlType="submit" onClick={submitForm} form={form}>Add Task</Button>
-              <Button className='modal-buttons' type="primary" onClick={() => setShowModal(false)}>Cancel</Button>
+              <Button className='modal-buttons' type="primary" htmlType="submit" onClick={submitForm} form={Form}>Add Task</Button>
+              <Button className='modal-buttons' type="primary" onClick={() => setShowEditModal(false)}>Cancel</Button>
             </div>
           </Form>
 
         </div>
       </Modal>
+      {/* This is the modal that pops up when the user clicks on the edit button */}
+      <Modal
+        style={{ width: "100vw" }}
+        centered={true}
+        footer={<></>}
+        open={showEditModal}
+        onCancel={() => setShowEditModal(false)}
+      >
+        <div className='form-container'>
+          <h1 className="modal-heading">Edit Task</h1>
+          <Form
+            name='task-editor-form'
+            autoComplete="off"
+            form={editForm}
+            id="task-editor-form"
+            style={{
+              maxWidth: 600,
+            }}
+          >
+            <Form.Item
+              name="taskName"
+              label="Task Name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your task!',
+                },
+              ]}>
+              <Input
+                placeholder="Task Name"
+                value={taskEditName}
+                onChange={(e) =>
+                  setTaskEditName(e.target.value)
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="description"
+              label="Description"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please input your description!',
+                },
+              ]}>
+              <TextArea
+                placeholder="Task Description"
+                rows={9}
+                value={descriptionEdit}
+                onChange={(e) =>
+                  setDescriptionEdit(e.target.value)
+                }
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="date"
+              label="Deadline"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your deadline date!',
+                },
+              ]}>
+              <DatePicker
+                value={deadlineEdit}
+                onChange={(date) => {
+                  setDeadlineEdit(date)
+                }}
+              />
+            </Form.Item>
+            <div className="button-container">
+              <Button className='modal-buttons' type="primary" htmlType="submit" onClick={submitEditForm} form={editForm}>Edit Task</Button>
+              <Button className='modal-buttons' type="primary" onClick={() => setShowEditModal(false)}>Cancel</Button>
+            </div>
+          </Form>
+        </div>
+
+
+      </Modal>
+
+
     </div>
   )
 }
