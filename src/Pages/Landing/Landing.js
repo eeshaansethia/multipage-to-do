@@ -4,7 +4,6 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Input, Button } from 'antd';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactAnimatedCursor from 'react-animated-cursor';
 
 export default function Landing() {
     const [name, setName] = useState('');
@@ -42,18 +41,6 @@ export default function Landing() {
 
     return (
         <div className='landing-container'>
-            {/* Adding an animated curson using external library */}
-            <ReactAnimatedCursor
-                innerSize={20}
-                outerSize={45}
-                color='249,231,13'
-                outerAlpha={0.2}
-                innerScale={0.5}
-                outerScale={1.1}
-                trailingSpeed={5}
-                hasBlendMode={true}
-            />
-
             <div className="landing-logo-container">
                 {/* Code from Stack Overflow to use gradient in MaterialUI Icons */}
                 <svg width={0} height={0}>
