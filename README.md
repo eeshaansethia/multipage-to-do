@@ -2,6 +2,8 @@
 
 Wrike is a beautiful Todo application developed using React JS. It utilizes antd and Material UI libraries to provide a visually appealing user interface. The application is designed to help you manage your tasks in an efficient manner.
 
+Wrike is currently active and can be accessed at **https://wrike-todo.netlify.app/**
+
 ## About Me
 
 My name is Eeshaan Sethia, and I am a second-year undergraduate student at Indian Institute of Technology, Kharagpur. I am the sole developer of this project and have experience working with React JS, Node JS, and MongoDB.
@@ -33,6 +35,7 @@ Wrike has the following features:
 Wrike is built using React JS, antd, and Material UI libraries. The application is designed to run in any modern web browser, and there are no special requirements for users who want to run the application on their local machines.
 
 ## Running the Application Locally
+
 
 To run Wrike locally, follow these steps:
 
