@@ -36,7 +36,7 @@ Wrike is built using React JS, antd, and Material UI libraries. The application 
 
 To run Wrike locally, follow these steps:
 
-1. Clone the repository using the command `git clone https://github.com/eeshaansethia/Wrike.git`
+1. Clone the repository using the command `git clone https://github.com/eeshaansethia/multipage-to-do`
 
 2. Navigate to the root directory of the project using the command `cd Wrike`.
 
