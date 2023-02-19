@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Wrike - A Todo Application made on React JS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Wrike is a beautiful Todo application developed using React JS. It utilizes antd and Material UI libraries to provide a visually appealing user interface. The application is designed to help you manage your tasks in an efficient manner.
 
-## Available Scripts
+## About Me
 
-In the project directory, you can run:
+My name is Eeshaan Sethia, and I am a second-year undergraduate student at Indian Institute of Technology, Kharagpur. I am the sole developer of this project and have experience working with React JS, Node JS, and MongoDB.
 
-### `npm start`
+## Motivation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The motivation behind building Wrike was to create a simple and efficient Todo application that allows users to manage their tasks in a seamless manner. I noticed that many existing Todo applications were either too complicated or lacked important features, so I set out to build an application that is easy to use and has all the essential features.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+Wrike has the following features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Adding Tasks** - You can add a new task by entering the Task Name, Description and Deadline.
 
-### `npm run build`
+2. **Editing Tasks** - You can edit an existing task by clicking on the Edit icon.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Removing Tasks** - You can remove a task by clicking on the Delete icon.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Completing Tasks** - You can mark a task as completed by clicking on the checkbox.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Sorting Tasks** - You can sort the tasks according to the Deadline and whether they are completed or not.
 
-### `npm run eject`
+6. **Pagination** - You can navigate through the pages of the task list using the pagination at the bottom of the page.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+7. **Local Storage** - Wrike stores all task data in the user's local storage, so the user can access their tasks even after closing the application.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Wrike is built using React JS, antd, and Material UI libraries. The application is designed to run in any modern web browser, and there are no special requirements for users who want to run the application on their local machines.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Running the Application Locally
 
-## Learn More
+To run Wrike locally, follow these steps:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repository using the command `git clone https://github.com/eeshaansethia/Wrike.git`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Navigate to the root directory of the project using the command `cd Wrike`.
 
-### Code Splitting
+3. Install the dependencies by running `npm install`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Start the development server using the command `npm start`.
 
-### Analyzing the Bundle Size
+5. The application should now be running on `http://localhost:3000/`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contributions and Issues
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you encounter any issues or have suggestions for improving the application, please feel free to reach out to me at eeshaans05@gmail.com. Additionally, if you would like to contribute to the project, please fork the repository and submit a pull request with your changes. I welcome any and all contributions to the project.
